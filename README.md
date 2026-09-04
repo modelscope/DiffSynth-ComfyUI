@@ -2,6 +2,10 @@
 
 A ComfyUI custom node plugin for the open-source framework [DiffSynth-Studio](https://github.com/modelscope/DiffSynth-Studio). It integrates DiffSynth-Studio's model configuration, quantization, LoRA, and inference pipeline capabilities into [ComfyUI](https://github.com/comfyanonymous/ComfyUI), enabling node-based image, video, and audio generation and editing.
 
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/8a377098-f022-436c-afa6-c26a4646f262" alt="DiffSynth-ComfyUI" width="100%">
+</p>
+
 ## Installation
 
 ### 1. Install ComfyUI
@@ -57,17 +61,17 @@ VRAMConfig → ModelConfig → MergeModelConfigs ───┐
 
 #### Example: Qwen-Image Text-to-Image
 
-1. Add a **VRAM Config** node to configure VRAM strategy for each stage (optional)
-2. Add 3 **ModelConfig** nodes with the following settings:
+1. Add a VRAM Config node to configure VRAM strategy for each stage (optional)
+2. Add 3 ModelConfig nodes with the following settings:
    - `model_id`: `Qwen/Qwen-Image`, `origin_file_pattern`: `transformer/diffusion_pytorch_model*.safetensors`
    - `model_id`: `Qwen/Qwen-Image`, `origin_file_pattern`: `text_encoder/model*.safetensors`
    - `model_id`: `Qwen/Qwen-Image`, `origin_file_pattern`: `vae/diffusion_pytorch_model.safetensors`
 3. Connect the VRAM Config output to the `vram_config` input of all 3 ModelConfig nodes
-4. Add a **Merge ModelConfigs** node and connect the outputs of the 3 ModelConfig nodes
-5. Add a **VRAM Limit** node (optional)
-6. Add a **Qwen Image Loader** node and connect `model_configs` and `vram_limit`
-7. Add a **Qwen Image Inference** node and connect the `pipe` output from the Loader
-8. Add a built-in **SaveImage** node and connect the `image` output from the Inference node
+4. Add a Merge ModelConfigs node and connect the outputs of the 3 ModelConfig nodes
+5. Add a VRAM Limit node (optional)
+6. Add a Qwen Image Loader node and connect `model_configs` and `vram_limit`
+7. Add a Qwen Image Inference node and connect the `pipe` output from the Loader
+8. Add a built-in SaveImage node and connect the `image` output from the Inference node
 9. Fill in the `prompt` in the Inference node and click Run
 
 

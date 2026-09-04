@@ -2,7 +2,7 @@ import torch
 from ..type_defs import VRAM_CONFIG
 
 
-_DTYPES = {"float16": torch.float16, "bfloat16": torch.bfloat16, "float32": torch.float32, "float8_e4m3fn": torch.float8_e4m3fn, "disk": disk}
+_DTYPES = {"float16": torch.float16, "bfloat16": torch.bfloat16, "float32": torch.float32, "float8_e4m3fn": torch.float8_e4m3fn, "disk": "disk"}
 _DEVICES = ["cpu", "cuda", "disk"]
 _DTYPE_NAMES = list(_DTYPES)
 
