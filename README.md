@@ -44,10 +44,9 @@ Once started, open the ComfyUI address shown in the terminal (typically `http://
 ### Using Preset Workflows
 
 1. Open the ComfyUI interface
-2. Click the **Workflow** (templates) tab in the left sidebar
-3. Select any DiffSynth template (e.g., `qwen_image`, `wan_video_t2v_14b`, etc.)
-4. Modify parameters such as `prompt` and `seed` in the Inference node
-5. Click Run
+2. Click the **Template** tab in the left sidebar and select any DiffSynth template
+3. Modify parameters such as `prompt` and `seed` in the Inference node
+4. Click Run
 
 ### Building a Workflow from Scratch
 
