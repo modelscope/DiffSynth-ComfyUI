@@ -3,7 +3,7 @@
 A ComfyUI custom node plugin for the open-source framework [DiffSynth-Studio](https://github.com/modelscope/DiffSynth-Studio). It integrates DiffSynth-Studio's model configuration, quantization, LoRA, and inference pipeline capabilities into [ComfyUI](https://github.com/comfyanonymous/ComfyUI), enabling node-based image, video, and audio generation and editing.
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/8a377098-f022-436c-afa6-c26a4646f262" alt="DiffSynth-ComfyUI" width="100%">
+  <img src="https://github.com/user-attachments/assets/be990357-5b44-4f3b-b646-a80f2f7567d5" alt="DiffSynth-ComfyUI" width="100%">
 </p>
 
 ## Installation
