@@ -25,6 +25,9 @@ _REQUIRED_INPUTS = [
 ]
 
 
+_MULTILINE_STRING_NAMES = {"prompt", "negative_prompt", "lyrics"}
+
+
 def _is_image(annotation):
     if annotation is Image.Image:
         return True
@@ -111,7 +114,7 @@ def _input_for(name, annotation, default):
         return _infer_from_default(name, default)
     if annotation is str:
         value = "" if (default is inspect.Parameter.empty or default is None) else str(default)
-        return ("STRING", {"default": value, "multiline": True})
+        return ("STRING", {"default": value, "multiline": name in _MULTILINE_STRING_NAMES})
     if annotation is bool:
         return ("BOOLEAN", {"default": False if (default is inspect.Parameter.empty or default is None) else default})
     if annotation is int:
@@ -157,7 +160,7 @@ def _input_for(name, annotation, default):
 
 def _infer_from_default(name, default):
     if default is inspect.Parameter.empty:
-        return ("STRING", {"default": "", "multiline": True})
+        return ("STRING", {"default": "", "multiline": name in _MULTILINE_STRING_NAMES})
     if isinstance(default, bool):
         return ("BOOLEAN", {"default": default})
     if isinstance(default, int):
@@ -165,7 +168,7 @@ def _infer_from_default(name, default):
     if isinstance(default, float):
         return ("FLOAT", _float_options(name, default))
     if isinstance(default, str):
-        return ("STRING", {"default": default, "multiline": True})
+        return ("STRING", {"default": default, "multiline": name in _MULTILINE_STRING_NAMES})
     return ("*", {})
 
 

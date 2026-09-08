@@ -12,7 +12,6 @@ class ModelConfigNode:
             "quant_config": (QUANT_CONFIG,),
             "path": ("STRING", {"default": ""}),
             "download_source": (["modelscope", "huggingface"], {"default": "modelscope"}),
-            "clear_parameters": ("BOOLEAN", {"default": False}),
         }}
 
     RETURN_TYPES = (MODEL_CONFIG,)
@@ -21,7 +20,7 @@ class ModelConfigNode:
     CATEGORY = "DiffSynth/config"
 
     def execute(self, model_id, origin_file_pattern, vram_config=None, quant_config=None,
-                path="", download_source="modelscope", clear_parameters=False):
+                path="", download_source="modelscope"):
         from diffsynth.core import ModelConfig
         kwargs = {}
         if vram_config:
@@ -32,10 +31,9 @@ class ModelConfigNode:
             kwargs["path"] = path.strip()
         if download_source:
             kwargs["download_source"] = download_source
-        if clear_parameters:
-            kwargs["clear_parameters"] = True
-        return (ModelConfig(model_id=model_id.strip() or None,
-                            origin_file_pattern=origin_file_pattern.strip() or None, **kwargs),)
+        model_config = ModelConfig(model_id=model_id.strip() or None, origin_file_pattern=origin_file_pattern.strip() or None, **kwargs)
+        model_config.download_if_necessary()
+        return (model_config,)
 
 
 class MergeModelConfigsNode:
