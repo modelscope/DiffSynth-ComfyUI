@@ -131,7 +131,10 @@ def _parameter_needs_conversion(annotation):
 
 def _to_image(value):
     if isinstance(value, Image.Image):
-        array = np.asarray(value.convert("RGB"), dtype=np.float32) / 255.0
+        if value.mode == "RGBA":
+            array = np.asarray(value, dtype=np.float32) / 255.0
+        else:
+            array = np.asarray(value.convert("RGB"), dtype=np.float32) / 255.0
         return torch.from_numpy(array).unsqueeze(0)
     if isinstance(value, (list, tuple)) and value and isinstance(value[0], Image.Image):
         arrays = [np.asarray(item.convert("RGB"), dtype=np.float32) / 255.0 for item in value]

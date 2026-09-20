@@ -35,6 +35,7 @@ PIPELINE_REGISTRY = {
         PipelineMeta("MovaAudioVideo", "MOVA Audio Video", "diffsynth.pipelines.mova_audio_video.MovaAudioVideoPipeline", "audio_video"),
         PipelineMeta("AceStep", "ACE-Step", "diffsynth.pipelines.ace_step.AceStepPipeline", "audio"),
         PipelineMeta("SenseNovaU1Image", "SenseNova U1 Image", "diffsynth.pipelines.sensenova_u1_image.SenseNovaU1ImagePipeline", "image"),
+        PipelineMeta("QwenImage21", "Qwen Image 2.1", "diffsynth.pipelines.qwen_image_21.QwenImage21Pipeline", "image"),
     ]
 }
 
