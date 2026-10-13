@@ -255,7 +255,7 @@
       "outputs": [],
       "properties": {"Node name for S&R": "SaveVideo"},
       "widgets_values": [
-        "DiffSynth/general_wan_video_t2v_1_3b.json",
+        "DiffSynth/general_wan_video_t2v_1_3b",
         "auto",
         {"codec": "auto"}
       ]

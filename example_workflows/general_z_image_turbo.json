@@ -180,7 +180,7 @@
       ],
       "outputs": [],
       "properties": {"Node name for S&R": "SaveImage"},
-      "widgets_values": ["DiffSynth/z_image_turbo"]
+      "widgets_values": ["DiffSynth/general_z_image_turbo"]
     }
   ],
   "links": [

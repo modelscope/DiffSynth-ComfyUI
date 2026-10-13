@@ -1,11 +1,15 @@
 import inspect
 import json
+from typing import get_args, get_origin
 import numpy as np
 import torch
 from PIL import Image
 from ..pipeline_registry import PIPELINE_REGISTRY, get_pipeline_class
 from ..signature_parser import parse_call_signature, _is_image, _is_image_list, _tuple_annotation, _list_annotation, _REQUIRED_INPUTS
 from ..type_defs import PIPE
+
+
+DEFAULT_AUDIO_SAMPLE_RATE = 44100
 
 
 def _tensor_to_pil(tensor: torch.Tensor) -> Image.Image:
@@ -99,10 +103,34 @@ def _parse_list(value, elem_type="any"):
     return value
 
 
+def _is_reference_list(annotation):
+    if get_origin(annotation) in (list, tuple):
+        args = get_args(annotation)
+        return len(args) == 1 and args[0] is dict
+    return False
+
+
+def _to_reference_list(value):
+    if isinstance(value, dict):
+        if "waveform" not in value:
+            return [value]
+        return [{"type": "audio", "audio": value["waveform"],
+                 "sample_rate": value.get("sample_rate", DEFAULT_AUDIO_SAMPLE_RATE)}]
+    if isinstance(value, (list, tuple)) and all(isinstance(item, dict) for item in value):
+        return list(value)
+    images = _to_pil_list(value)
+    if isinstance(images, list) and all(isinstance(image, Image.Image) for image in images):
+        return [{"type": "image", "image": image} for image in images]
+    raise ValueError(f"Cannot convert {type(value).__name__} to references: expected an image, a list of images, "
+                     f"an audio, or a list of reference dicts.")
+
+
 def _convert_param(name, value, annotation):
     if value is None:
         return None
 
+    if _is_reference_list(annotation):
+        return _to_reference_list(value)
     if _is_image_list(annotation):
         return _to_pil_list(value)
     if annotation is Image.Image:
@@ -121,6 +149,8 @@ def _convert_param(name, value, annotation):
 
 def _parameter_needs_conversion(annotation):
     if _is_image(annotation):
+        return True
+    if _is_reference_list(annotation):
         return True
     if _tuple_annotation(annotation) is not None:
         return True
@@ -144,7 +174,7 @@ def _to_image(value):
     return value
 
 
-def _to_audio(value, sample_rate=44100):
+def _to_audio(value, sample_rate=DEFAULT_AUDIO_SAMPLE_RATE):
     if isinstance(value, dict):
         waveform = value.get("waveform", value.get("audios"))
         sr = value.get("sample_rate", sample_rate)
@@ -163,7 +193,21 @@ def _to_audio(value, sample_rate=44100):
     return value
 
 
-def _convert_output(value, output_type, sample_rate=44100):
+_AUDIO_MODEL_ATTRS = ("audio_vocoder", "audio_vae", "vocoder", "vae")
+_AUDIO_RATE_ATTRS = ("output_sampling_rate", "sample_rate", "sampling_rate")
+
+
+def _resolve_audio_sample_rate(pipe, meta):
+    for model_attr in _AUDIO_MODEL_ATTRS:
+        model = getattr(pipe, model_attr, None)
+        for rate_attr in _AUDIO_RATE_ATTRS:
+            rate = getattr(model, rate_attr, None)
+            if isinstance(rate, int):
+                return rate
+    return meta.audio_sample_rate or DEFAULT_AUDIO_SAMPLE_RATE
+
+
+def _convert_output(value, output_type, sample_rate=DEFAULT_AUDIO_SAMPLE_RATE):
     if output_type in ("image", "video"):
         return _to_image(value)
     if output_type == "audio":
@@ -206,11 +250,7 @@ def generate_inference_nodes():
                     call_kwargs[name] = value
 
             result = pipe(**call_kwargs)
-            sample_rate = getattr(pipe, "audio_sample_rate", None)
-            if sample_rate is None:
-                sample_rate = getattr(pipe, "retake_audio_sample_rate", None)
-            if sample_rate is None:
-                sample_rate = 44100
+            sample_rate = _resolve_audio_sample_rate(pipe, _meta)
             if _meta.output_type == "audio_video":
                 return _convert_output(result, _meta.output_type, sample_rate)
             return (_convert_output(result, _meta.output_type, sample_rate),)

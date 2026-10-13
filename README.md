@@ -8,7 +8,17 @@ A ComfyUI custom node plugin for the open-source framework [DiffSynth-Studio](ht
 
 ## Installation
 
-### 1. Install ComfyUI
+### Option 1: ComfyUI Registry
+
+**ComfyUI Desktop** / **ComfyUI-Manager**:
+
+- Open the sidebar **Manage Extensions** or **Manager**
+- Search for DiffSynth-ComfyUI
+- Click Install, then restart ComfyUI
+
+### Option 2: Manual git clone
+
+1. Install ComfyUI
 
 ```bash
 git clone https://github.com/comfyanonymous/ComfyUI.git
@@ -16,18 +26,13 @@ cd ComfyUI
 pip install -r requirements.txt
 ```
 
-### 2. Install DiffSynth-Studio
+2. Install DiffSynth-Studio
 
 ```bash
 pip install git+https://github.com/modelscope/DiffSynth-Studio.git
 ```
 
-> If you need quantization features, install the quantization extras:
-> ```bash
-> pip install "diffsynth[quant] @ git+https://github.com/modelscope/DiffSynth-Studio.git"
-> ```
-
-### 3. Install this plugin
+3. Install this plugin
 
 ```bash
 cd ComfyUI/custom_nodes
@@ -35,6 +40,12 @@ git clone https://github.com/modelscope/DiffSynth-ComfyUI.git
 cd ..
 python main.py
 ```
+
+
+> If you need quantization features, install the quantization extras:
+> ```bash
+> pip install "diffsynth[quant] @ git+https://github.com/modelscope/DiffSynth-Studio.git"
+> ```
 
 Once started, open the ComfyUI address shown in the terminal (typically `http://127.0.0.1:8188`) in your browser.
 

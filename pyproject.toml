@@ -1,0 +1,15 @@
+[project]
+name = "diffsynth-studio-comfyui"
+description = "A ComfyUI custom node plugin for DiffSynth-Studio: model configuration, VRAM management, quantization, LoRA and inference pipelines for node-based image, video and audio generation and editing."
+version = "1.0.0"
+dependencies = ["diffsynth>=2.1.9"]
+license = "Apache-2.0"
+requires-python = ">=3.10.1"
+
+[project.urls]
+Repository = "https://github.com/modelscope/DiffSynth-ComfyUI"
+
+[tool.comfy]
+PublisherId = "diffsynth"
+DisplayName = "DiffSynth-ComfyUI"
+Icon = "https://github.com/user-attachments/assets/a82f51bd-145f-4d97-845d-ea70ce2be517"

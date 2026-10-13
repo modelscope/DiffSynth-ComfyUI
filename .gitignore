@@ -1,6 +1,18 @@
-  __pycache__/
-  *.py[cod]
-  *.pyo
-  .DS_Store
-  .idea/
-  .vscode/
+__pycache__/
+*.py[cod]
+*.pyo
+.DS_Store
+.idea/
+.vscode/
+
+*.tar.gz
+dist/
+.comfy/
+
+venv/
+.venv/
+
+*.safetensors
+*.ckpt
+*.pt
+*.bin

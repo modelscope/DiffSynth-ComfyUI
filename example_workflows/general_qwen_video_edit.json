@@ -1,5 +1,5 @@
 {
-  "last_node_id": 16,
+  "last_node_id": 15,
   "last_link_id": 16,
   "nodes": [
 {
@@ -202,7 +202,7 @@
         {"name": "video", "type": "IMAGE", "links": [13], "slot_index": 0}
       ],
       "properties": {"Node name for S&R": "DiffSynthQwenVideoEditInference"},
-      "widgets_values": [0, "fixed", 40, 640, 384, 45, "Transform the video into Japanese anime style"]
+      "widgets_values": [0, "fixed", 40, 640, 384, 45, false, "30,52", "15,26", ""]
     },
 {
       "id": 12,

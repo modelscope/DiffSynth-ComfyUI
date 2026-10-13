@@ -305,7 +305,7 @@
       ],
       "properties": {"Node name for S&R": "SaveVideo"},
       "widgets_values": [
-        "DiffSynth/general_wan_video_t2v_1_3b",
+        "DiffSynth/general_wan_video_fun_a14b_control",
         "auto",
         {"codec": "auto"}
       ]

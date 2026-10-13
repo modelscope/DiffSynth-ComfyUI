@@ -9,6 +9,7 @@ class PipelineMeta:
     display_name: str
     pipeline_class_path: str
     output_type: str
+    audio_sample_rate: int = None
 
 
 PIPELINE_REGISTRY = {
@@ -30,12 +31,13 @@ PIPELINE_REGISTRY = {
         PipelineMeta("QwenVideoEdit", "Qwen Video Edit", "diffsynth.pipelines.qwen_video_edit.QwenVideoEditPipeline", "video"),
         PipelineMeta("LingBotVideo", "LingBot Video", "diffsynth.pipelines.lingbot_video.LingBotVideoPipeline", "video"),
         PipelineMeta("LTX2AudioVideo", "LTX-2 Audio Video", "diffsynth.pipelines.ltx2_audio_video.LTX2AudioVideoPipeline", "audio_video"),
-        PipelineMeta("MiniMaxH3", "MiniMax H3", "diffsynth.pipelines.minimax_h3_audio_video.MiniMaxH3Pipeline", "audio_video"),
-        PipelineMeta("MiniMaxMusic3", "MiniMax Music 3", "diffsynth.pipelines.minimax_music3.MiniMaxMusic3Pipeline", "audio"),
-        PipelineMeta("MovaAudioVideo", "MOVA Audio Video", "diffsynth.pipelines.mova_audio_video.MovaAudioVideoPipeline", "audio_video"),
-        PipelineMeta("AceStep", "ACE-Step", "diffsynth.pipelines.ace_step.AceStepPipeline", "audio"),
+        PipelineMeta("MiniMaxH3", "MiniMax H3", "diffsynth.pipelines.minimax_h3_audio_video.MiniMaxH3Pipeline", "audio_video", 32000),
+        PipelineMeta("MiniMaxMusic3", "MiniMax Music 3", "diffsynth.pipelines.minimax_music3.MiniMaxMusic3Pipeline", "audio", 44100),
+        PipelineMeta("MovaAudioVideo", "MOVA Audio Video", "diffsynth.pipelines.mova_audio_video.MovaAudioVideoPipeline", "audio_video", 48000),
+        PipelineMeta("AceStep", "ACE-Step", "diffsynth.pipelines.ace_step.AceStepPipeline", "audio", 48000),
         PipelineMeta("SenseNovaU1Image", "SenseNova U1 Image", "diffsynth.pipelines.sensenova_u1_image.SenseNovaU1ImagePipeline", "image"),
         PipelineMeta("QwenImage21", "Qwen Image 2.1", "diffsynth.pipelines.qwen_image_21.QwenImage21Pipeline", "image"),
+        PipelineMeta("YuE2", "YuE2", "diffsynth.pipelines.yue2.YuE2Pipeline", "audio", 48000),
     ]
 }
 
@@ -72,7 +74,3 @@ def get_from_pretrained_extra_params(type_name):
         else:
             result.append((name, "STRING", param.default))
     return result
-
-
-def get_module_attr(type_name):
-    return PIPELINE_REGISTRY[type_name].module_attr

@@ -12,6 +12,7 @@ _EXCLUDED = {
     "extra_text_embedding", "negative_extra_text_embedding",
     "residual", "negative_residual",
     "tea_cache_model_id",
+    "on_token",
 }
 
 

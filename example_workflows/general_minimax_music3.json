@@ -173,13 +173,14 @@
       "inputs": [
         {"name": "model_configs", "type": "DIFFSYNTH_MODEL_CONFIG_LIST", "link": 12},
         {"name": "tokenizer_config", "type": "DIFFSYNTH_MODEL_CONFIG", "link": 11},
+        {"name": "redirect_common_files", "type": "BOOLEAN", "link": null},
         {"name": "vram_limit", "type": "DIFFSYNTH_VRAM_LIMIT", "link": 13}
       ],
       "outputs": [
         {"name": "pipe", "type": "DIFFSYNTH_PIPE", "links": [15], "slot_index": 0}
       ],
       "properties": {"Node name for S&R": "DiffSynthMiniMaxMusic3Loader"},
-      "widgets_values": ["bfloat16", "cuda"]
+      "widgets_values": ["bfloat16", "cuda", true]
     },
 {
       "id": 12,
@@ -233,7 +234,7 @@
     [10, 6, 0, 7, 4, "DIFFSYNTH_MODEL_CONFIG"],
     [11, 8, 0, 11, 1, "DIFFSYNTH_MODEL_CONFIG"],
     [12, 7, 0, 11, 0, "DIFFSYNTH_MODEL_CONFIG_LIST"],
-    [13, 10, 0, 11, 2, "DIFFSYNTH_VRAM_LIMIT"],
+    [13, 10, 0, 11, 3, "DIFFSYNTH_VRAM_LIMIT"],
     [15, 11, 0, 12, 0, "DIFFSYNTH_PIPE"],
     [16, 12, 0, 13, 0, "AUDIO"]
   ],
