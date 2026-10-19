@@ -38,6 +38,7 @@ PIPELINE_REGISTRY = {
         PipelineMeta("SenseNovaU1Image", "SenseNova U1 Image", "diffsynth.pipelines.sensenova_u1_image.SenseNovaU1ImagePipeline", "image"),
         PipelineMeta("QwenImage21", "Qwen Image 2.1", "diffsynth.pipelines.qwen_image_21.QwenImage21Pipeline", "image"),
         PipelineMeta("YuE2", "YuE2", "diffsynth.pipelines.yue2.YuE2Pipeline", "audio", 48000),
+        PipelineMeta("MOSSImage", "MOSS Image", "diffsynth.pipelines.moss_image.MOSSImagePipeline", "image"),
     ]
 }
 
