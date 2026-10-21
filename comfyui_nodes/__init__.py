@@ -1,6 +1,3 @@
-import diffsynth
-
-
 from .nodes import (VRAMConfigNode, QuantizationConfigNode, MixedQuantizeConfigNode,
                     ModelConfigNode, VRAMLimitNode, MergeModelConfigsNode, generate_loader_nodes,
                     LoRAClearNode, LoRALoadNode, generate_inference_nodes)
@@ -16,8 +13,12 @@ NODE_CLASS_MAPPINGS = {
     "DiffSynthLoRAClear": LoRAClearNode,
     "DiffSynthLoRALoad": LoRALoadNode,
 }
-NODE_CLASS_MAPPINGS.update(generate_loader_nodes())
-NODE_CLASS_MAPPINGS.update(generate_inference_nodes())
+
+try:
+    NODE_CLASS_MAPPINGS.update(generate_loader_nodes())
+    NODE_CLASS_MAPPINGS.update(generate_inference_nodes())
+except Exception as e:
+    print("[DiffSynth-ComfyUI] DiffSynth is not installed; only 8 configuration-class nodes have been loaded.")
 
 NODE_DISPLAY_NAME_MAPPINGS = {
     "DiffSynthVRAMConfig": "DiffSynth: VRAM Config",
