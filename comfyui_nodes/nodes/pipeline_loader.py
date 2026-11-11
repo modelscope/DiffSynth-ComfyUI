@@ -7,9 +7,9 @@ def _dtype(name):
     return {"float16": torch.float16, "bfloat16": torch.bfloat16, "float32": torch.float32}[name]
 
 
-def generate_loader_nodes():
+def generate_loader_nodes(pipeline_registry=PIPELINE_REGISTRY):
     nodes = {}
-    for type_name, meta in PIPELINE_REGISTRY.items():
+    for type_name, meta in pipeline_registry.items():
         extra_params = get_from_pretrained_extra_params(type_name)
 
         required = {

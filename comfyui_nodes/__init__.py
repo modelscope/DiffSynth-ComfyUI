@@ -1,3 +1,5 @@
+import logging
+
 from .nodes import (VRAMConfigNode, QuantizationConfigNode, MixedQuantizeConfigNode,
                     ModelConfigNode, VRAMLimitNode, MergeModelConfigsNode, generate_loader_nodes,
                     LoRAClearNode, LoRALoadNode, generate_inference_nodes)
@@ -14,11 +16,16 @@ NODE_CLASS_MAPPINGS = {
     "DiffSynthLoRALoad": LoRALoadNode,
 }
 
-try:
-    NODE_CLASS_MAPPINGS.update(generate_loader_nodes())
-    NODE_CLASS_MAPPINGS.update(generate_inference_nodes())
-except Exception as e:
-    print("[DiffSynth-ComfyUI] DiffSynth is not installed; only 8 configuration-class nodes have been loaded.")
+for type_name, meta in PIPELINE_REGISTRY.items():
+    for suffix, generate_nodes in (("Loader", generate_loader_nodes), ("Inference", generate_inference_nodes)):
+        try:
+            NODE_CLASS_MAPPINGS.update(generate_nodes({type_name: meta}))
+        except Exception as e:
+            logging.getLogger(__name__).warning(
+                "[DiffSynth-ComfyUI] Skipping DiffSynth%s%s (%s): %s: %s",
+                type_name, suffix, meta.pipeline_class_path, type(e).__name__, e,
+                exc_info=True,
+            )
 
 NODE_DISPLAY_NAME_MAPPINGS = {
     "DiffSynthVRAMConfig": "DiffSynth: VRAM Config",
@@ -31,8 +38,9 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "DiffSynthLoRALoad": "DiffSynth: LoRA Load",
 }
 for type_name, meta in PIPELINE_REGISTRY.items():
-    NODE_DISPLAY_NAME_MAPPINGS[f"DiffSynth{type_name}Loader"] = f"DiffSynth: {meta.display_name} Loader"
-for type_name, meta in PIPELINE_REGISTRY.items():
-    NODE_DISPLAY_NAME_MAPPINGS[f"DiffSynth{type_name}Inference"] = f"DiffSynth: {meta.display_name} Inference"
+    for suffix in ("Loader", "Inference"):
+        node_name = f"DiffSynth{type_name}{suffix}"
+        if node_name in NODE_CLASS_MAPPINGS:
+            NODE_DISPLAY_NAME_MAPPINGS[node_name] = f"DiffSynth: {meta.display_name} {suffix}"
 
 __all__ = ["NODE_CLASS_MAPPINGS", "NODE_DISPLAY_NAME_MAPPINGS"]

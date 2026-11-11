@@ -161,7 +161,7 @@
         {"name": "image", "type": "IMAGE", "links": [12], "slot_index": 0}
       ],
       "properties": {"Node name for S&R": "DiffSynthQwenImage21Inference"},
-      "widgets_values": ["", 42, "fixed", 50, 1024, 1024, "", 1.0, true, false, 256, 192]
+      "widgets_values": ["", 42, "fixed", 50, 1024, 1024, "", 1.0, true, false, false, 256, 192]
     },
 {
       "id": 11,

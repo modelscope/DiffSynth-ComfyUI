@@ -220,9 +220,9 @@ def _convert_output(value, output_type, sample_rate=DEFAULT_AUDIO_SAMPLE_RATE):
     return value
 
 
-def generate_inference_nodes():
+def generate_inference_nodes(pipeline_registry=PIPELINE_REGISTRY):
     nodes = {}
-    for type_name, meta in PIPELINE_REGISTRY.items():
+    for type_name, meta in pipeline_registry.items():
         required, optional = parse_call_signature(get_pipeline_class(type_name), type_name)
         required = {"pipe": (PIPE,)} | required
 
