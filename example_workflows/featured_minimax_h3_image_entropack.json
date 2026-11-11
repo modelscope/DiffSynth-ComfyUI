@@ -168,7 +168,7 @@
         }
       ],
       "properties": {"Node name for S&R": "DiffSynthModelConfig"},
-      "widgets_values": ["DiffSynth-Studio/MiniMax-H3-Image-EntroPack", "models/vae_int8.safetensors"],
+      "widgets_values": ["DiffSynth-Studio/MiniMax-H3-Image-EntroPack", "models/vae_int8.safetensors", "", "modelscope", true],
       "title": "VAE"
     },
     {
