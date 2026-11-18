@@ -188,7 +188,7 @@
         {"name": "wantodance_keyframes_mask", "type": "*", "link": null}
       ],
       "outputs": [
-        {"name": "video", "type": "IMAGE", "links": [12], "slot_index": 0}
+        {"name": "video", "type": "IMAGE", "links": [13], "slot_index": 0}
       ],
       "properties": {"Node name for S&R": "DiffSynthWanVideoInference"},
       "widgets_values": [

@@ -40,6 +40,8 @@ PIPELINE_REGISTRY = {
         PipelineMeta("YuE2", "YuE2", "diffsynth.pipelines.yue2.YuE2Pipeline", "audio", 48000),
         PipelineMeta("MOSSImage", "MOSS Image", "diffsynth.pipelines.moss_image.MOSSImagePipeline", "image"),
         PipelineMeta("MiniMaxH3Image", "MiniMax H3 Image", "diffsynth.pipelines.minimax_h3_image.MiniMaxH3ImagePipeline", "image"),
+        PipelineMeta("Flux3", "FLUX.3", "diffsynth.pipelines.flux3_image.Flux3ImagePipeline", "image"),
+        PipelineMeta("Fibo", "Fibo 2.0", "diffsynth.pipelines.fibo.FiboPipeline", "image"),
     ]
 }
 

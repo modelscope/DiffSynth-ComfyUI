@@ -6,6 +6,7 @@ METHODS = [
     "torchao_fp8_w8a16", "torchao_int8_w8a8", "torchao_fp8_w8a8", "torchao_int4_w4a8",
     "torchao_mxfp8_w8a8", "torchao_mxfp4_w4a4", "torchao_nvfp4_w4a4", "torchao_nvfp4_w4a16",
     "comfy_kitchen_int8_w8a8", "comfy_kitchen_fp8_w8a8",
+    "entropack_lossy_quant_int8_raw",
 ]
 
 
