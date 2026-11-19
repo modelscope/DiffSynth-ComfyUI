@@ -1,6 +1,6 @@
 {
-  "last_node_id": 16,
-  "last_link_id": 20,
+  "last_node_id": 19,
+  "last_link_id": 25,
   "nodes": [
 {
       "id": 1,
@@ -12,7 +12,7 @@
       "mode": 0,
       "inputs": [],
       "outputs": [
-        {"name": "vram_config", "type": "DIFFSYNTH_VRAM_CONFIG", "links": [1, 2, 3, 4, 5, 6], "slot_index": 0}
+        {"name": "vram_config", "type": "DIFFSYNTH_VRAM_CONFIG", "links": [1, 2, 3, 4, 5, 6, 24], "slot_index": 0}
       ],
       "properties": {"Node name for S&R": "DiffSynthVRAMConfig"},
       "widgets_values": ["cpu", "bfloat16", "cpu", "bfloat16", "cuda", "bfloat16", "cuda", "bfloat16"]
@@ -33,7 +33,25 @@
         {"name": "model_config", "type": "DIFFSYNTH_MODEL_CONFIG", "links": [7], "slot_index": 0}
       ],
       "properties": {"Node name for S&R": "DiffSynthModelConfig"},
-      "widgets_values": ["openmoss/MOVA-360p", "video_dit*/diffusion_pytorch_model-*.safetensors"]
+      "widgets_values": ["openmoss/MOVA-360p", "video_dit/diffusion_pytorch_model-*.safetensors"]
+    },
+{
+      "id": 19,
+      "type": "DiffSynthModelConfig",
+      "pos": [800, 230],
+      "size": {"0": 320, "1": 150},
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {"name": "vram_config", "type": "DIFFSYNTH_VRAM_CONFIG", "link": 24},
+        {"name": "quant_config", "type": "DIFFSYNTH_QUANT_CONFIG", "link": null}
+      ],
+      "outputs": [
+        {"name": "model_config", "type": "DIFFSYNTH_MODEL_CONFIG", "links": [25], "slot_index": 0}
+      ],
+      "properties": {"Node name for S&R": "DiffSynthModelConfig"},
+      "widgets_values": ["openmoss/MOVA-360p", "video_dit_2/diffusion_pytorch_model-*.safetensors"]
     },
 {
       "id": 3,
@@ -139,7 +157,8 @@
         {"name": "model_config_3", "type": "DIFFSYNTH_MODEL_CONFIG", "link": 9},
         {"name": "model_config_4", "type": "DIFFSYNTH_MODEL_CONFIG", "link": 10},
         {"name": "model_config_5", "type": "DIFFSYNTH_MODEL_CONFIG", "link": 11},
-        {"name": "model_config_6", "type": "DIFFSYNTH_MODEL_CONFIG", "link": 12}
+        {"name": "model_config_6", "type": "DIFFSYNTH_MODEL_CONFIG", "link": 12},
+        {"name": "model_config_7", "type": "DIFFSYNTH_MODEL_CONFIG", "link": 25}
       ],
       "outputs": [
         {"name": "model_configs", "type": "DIFFSYNTH_MODEL_CONFIG_LIST", "links": [14], "slot_index": 0}
@@ -220,7 +239,7 @@
         {"name": "audio", "type": "AUDIO", "links": [22], "slot_index": 1}
       ],
       "properties": {"Node name for S&R": "DiffSynthMovaAudioVideoInference"},
-      "widgets_values": ["", 0, "fixed", 50, 352, 640, "", 121, 81, 24, 5.0, 0.9, 5.0, true, "30,52", "15,26"]
+      "widgets_values": ["", 0, "fixed", 50, 352, 640, "", 1.0, 121, 24, 5.0, 0.9, 5.0, true, "30,52", "15,26"]
     },
 {
       "id": 14,
@@ -301,7 +320,9 @@
     [18, 14, 0, 13, 1, "IMAGE"],
     [21, 13, 0, 17, 0, "IMAGE"],
     [22, 13, 1, 17, 2, "AUDIO"],
-    [23, 17, 0, 18, 0, "VIDEO"]
+    [23, 17, 0, 18, 0, "VIDEO"],
+    [24, 1, 0, 19, 0, "DIFFSYNTH_VRAM_CONFIG"],
+    [25, 19, 0, 8, 6, "DIFFSYNTH_MODEL_CONFIG"]
   ],
   "groups": [
     {"title": "VRAM/Quantization Config", "bounding": [0, -70, 320, 490], "color": "#88aACC", "font_size": 24, "flags": {}},

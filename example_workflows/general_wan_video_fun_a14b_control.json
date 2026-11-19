@@ -1,6 +1,6 @@
 {
-  "last_node_id": 16,
-  "last_link_id": 18,
+  "last_node_id": 17,
+  "last_link_id": 20,
   "nodes": [
 {
       "id": 1,
@@ -12,7 +12,7 @@
       "mode": 0,
       "inputs": [],
       "outputs": [
-        {"name": "vram_config", "type": "DIFFSYNTH_VRAM_CONFIG", "links": [1, 2, 3], "slot_index": 0}
+        {"name": "vram_config", "type": "DIFFSYNTH_VRAM_CONFIG", "links": [1, 2, 3, 19], "slot_index": 0}
       ],
       "properties": {"Node name for S&R": "DiffSynthVRAMConfig"},
       "widgets_values": ["cpu", "bfloat16", "cpu", "bfloat16", "cuda", "bfloat16", "cuda", "bfloat16"]
@@ -33,7 +33,7 @@
         {"name": "model_config", "type": "DIFFSYNTH_MODEL_CONFIG", "links": [7], "slot_index": 0}
       ],
       "properties": {"Node name for S&R": "DiffSynthModelConfig"},
-      "widgets_values": ["Wan-AI/Wan2.2-Fun-A14B-Control", "google/umt5-xxl/"]
+      "widgets_values": ["Wan-AI/Wan2.1-T2V-1.3B", "google/umt5-xxl/"]
     },
 {
       "id": 8,
@@ -66,7 +66,25 @@
         {"name": "model_config", "type": "DIFFSYNTH_MODEL_CONFIG", "links": [4], "slot_index": 0}
       ],
       "properties": {"Node name for S&R": "DiffSynthModelConfig"},
-      "widgets_values": ["Wan-AI/Wan2.2-Fun-A14B-Control", "diffusion_pytorch_model*.safetensors"]
+      "widgets_values": ["PAI/Wan2.2-Fun-A14B-Control", "high_noise_model/diffusion_pytorch_model*.safetensors"]
+    },
+{
+      "id": 17,
+      "type": "DiffSynthModelConfig",
+      "pos": [800, 230],
+      "size": {"0": 320, "1": 150},
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {"name": "vram_config", "type": "DIFFSYNTH_VRAM_CONFIG", "link": 19},
+        {"name": "quant_config", "type": "DIFFSYNTH_QUANT_CONFIG", "link": null}
+      ],
+      "outputs": [
+        {"name": "model_config", "type": "DIFFSYNTH_MODEL_CONFIG", "links": [20], "slot_index": 0}
+      ],
+      "properties": {"Node name for S&R": "DiffSynthModelConfig"},
+      "widgets_values": ["PAI/Wan2.2-Fun-A14B-Control", "low_noise_model/diffusion_pytorch_model*.safetensors"]
     },
 {
       "id": 3,
@@ -84,7 +102,7 @@
         {"name": "model_config", "type": "DIFFSYNTH_MODEL_CONFIG", "links": [5], "slot_index": 0}
       ],
       "properties": {"Node name for S&R": "DiffSynthModelConfig"},
-      "widgets_values": ["Wan-AI/Wan2.2-Fun-A14B-Control", "models_t5_umt5-xxl-enc-bf16.pth"]
+      "widgets_values": ["DiffSynth-Studio/Wan-Series-Converted-Safetensors", "models_t5_umt5-xxl-enc-bf16.safetensors"]
     },
 {
       "id": 4,
@@ -102,7 +120,7 @@
         {"name": "model_config", "type": "DIFFSYNTH_MODEL_CONFIG", "links": [6], "slot_index": 0}
       ],
       "properties": {"Node name for S&R": "DiffSynthModelConfig"},
-      "widgets_values": ["Wan-AI/Wan2.2-Fun-A14B-Control", "Wan2.1_VAE.pth"]
+      "widgets_values": ["DiffSynth-Studio/Wan-Series-Converted-Safetensors", "Wan2.1_VAE.safetensors"]
     },
 {
       "id": 14,
@@ -168,7 +186,7 @@
         {"name": "model_config_1", "type": "DIFFSYNTH_MODEL_CONFIG", "link": 4},
         {"name": "model_config_2", "type": "DIFFSYNTH_MODEL_CONFIG", "link": 5},
         {"name": "model_config_3", "type": "DIFFSYNTH_MODEL_CONFIG", "link": 6},
-        {"name": "model_config_4", "type": "DIFFSYNTH_MODEL_CONFIG", "link": null},
+        {"name": "model_config_4", "type": "DIFFSYNTH_MODEL_CONFIG", "link": 20},
         {"name": "model_config_5", "type": "DIFFSYNTH_MODEL_CONFIG", "link": null},
         {"name": "model_config_6", "type": "DIFFSYNTH_MODEL_CONFIG", "link": null}
       ],
@@ -326,7 +344,9 @@
     [14, 12, 0, 13, 0, "VIDEO"],
     [15, 14, 0, 15, 0, "VIDEO"],
     [17, 15, 0, 10, 9, "IMAGE"],
-    [18, 16, 0, 10, 10, "IMAGE"]
+    [18, 16, 0, 10, 10, "IMAGE"],
+    [19, 1, 0, 17, 0, "DIFFSYNTH_VRAM_CONFIG"],
+    [20, 17, 0, 5, 3, "DIFFSYNTH_MODEL_CONFIG"]
   ],
   "groups": [
     {"title": "VRAM/Quantization Config", "bounding": [0, -70, 320, 490], "color": "#88aACC", "font_size": 24, "flags": {}},

@@ -1,6 +1,6 @@
 {
-  "last_node_id": 15,
-  "last_link_id": 19,
+  "last_node_id": 19,
+  "last_link_id": 25,
   "nodes": [
 {
       "id": 1,
@@ -149,7 +149,7 @@
         {"name": "audio", "type": "AUDIO", "links": [24], "slot_index": 1}
       ],
       "properties": {"Node name for S&R": "DiffSynthLTX2AudioVideoInference"},
-      "widgets_values": ["", 43, "fixed", 30, 1024, 1536, "", 1.0, "0", 1.0, 2, 48000, 121, 24, 3.0, true, 512, 128, 128, 24, true]
+      "widgets_values": ["", 43, "fixed", 30, 1024, 1536, "", 1.0, "0", 1.0, 2, 48000, 121, 24, false, 1.0, 20.0, false, 3.0, true, 512, 128, 128, 24, true]
     },
 {
       "id": 16,
@@ -170,7 +170,7 @@
         {"name": "model_config", "type": "DIFFSYNTH_MODEL_CONFIG", "links": [21], "slot_index": 0}
       ],
       "properties": {"Node name for S&R": "DiffSynthModelConfig"},
-      "widgets_values": ["Lightricks/LTX-2.3", "ltx-2.3-spatial-upscaler-x2-1.0.safetensors"]
+      "widgets_values": ["Lightricks/LTX-2.3", "ltx-2.3-spatial-upscaler-x2-1.1.safetensors"]
     },
 {
       "id": 17,
